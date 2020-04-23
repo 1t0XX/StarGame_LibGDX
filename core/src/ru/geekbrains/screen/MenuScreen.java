@@ -4,19 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.base.BaseScreen;
+import ru.geekbrains.sprite.Logo;
 
 public class MenuScreen extends BaseScreen {
 
 
-   private Texture img;
-    private Vector2 touch;
-    private Vector2 v;
-    private Vector2 pos;
 
 
+    private Texture img;
+    private Logo logo;
 
 
 
@@ -25,21 +25,22 @@ public class MenuScreen extends BaseScreen {
     public void show() {
         super.show();
         img = new Texture("badlogic.jpg");
-        touch = new Vector2();
-        v= new Vector2(0.4f,0.3f);
-        pos= new Vector2(0,0);
+        logo = new Logo(new TextureRegion(img));
+
+
+
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        pos.add(v);
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        logo.update(delta);
+
+        Gdx.gl.glClearColor(0.26f, 0.5f, 0.8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(img, pos.x, pos.y);
+       logo.draw(batch);
 
-        //batch.draw(rgn,0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
     }
 
@@ -49,10 +50,8 @@ public class MenuScreen extends BaseScreen {
         img.dispose();
     }
 
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-       touch.set(screenX, Gdx.graphics.getHeight() - screenY);
-        System.out.println("touch.x = " + touch.x + "touch.y= " + touch.y);
+    public boolean touchDown( Vector2 touch, int pointer, int button) {
+        logo.touchDown(touch,pointer,button);
         return false;
     }
 
