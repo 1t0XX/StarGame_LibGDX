@@ -8,6 +8,7 @@ import ru.geekbrains.math.Rect;
 public class Background extends Sprite {
 
     public Background(TextureRegion region) {
+
         super(region);
     }
 

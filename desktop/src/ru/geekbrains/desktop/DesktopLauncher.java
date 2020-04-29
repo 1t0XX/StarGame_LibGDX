@@ -11,6 +11,5 @@ public class DesktopLauncher {
 		config.height = 640;
 		config.width = 480;
 		config.resizable = false;
-		new LwjglApplication(new StarGame(),config);
 	}
 }
