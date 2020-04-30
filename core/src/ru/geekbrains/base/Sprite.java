@@ -41,6 +41,10 @@ public abstract class Sprite extends Rect {
 
     }
 
+    public void dispose(){
+
+    }
+
     public void draw(SpriteBatch batch) {
         batch.draw(
                 regions[frame],
